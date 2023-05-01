@@ -16,7 +16,7 @@ productivity over the life of the repository. This MVP would contain a break dow
   <li>MVP</li>
   <ul>
     <li>Create project and make initial commit to Github</li>
-    <li>Get repo URL from user</li>
+    <li>Get valid repo URL from user</li>
     <li>Gather data from Github API</li>
     <li>Parse data for team members productivity</li>
     <li>Create report</li>
