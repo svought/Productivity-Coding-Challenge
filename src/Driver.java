@@ -19,25 +19,33 @@ public class Driver {
             return false;
         }
     }
-    public static void main(String[] args) throws MalformedURLException, URISyntaxException {
 
+    public static void driver() {
         // Get repo URL from user
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter GitHub repository URL (example: https://github.com/svought/GR_Coding_Challenge) : ");
+        System.out.print("Enter public GitHub repository URL (example: https://github.com/square/okhttp) : ");
         String url = scanner.nextLine();
 
         // Ensure valid url is given by user
         while (!isValidURL(url)) {
-            System.out.print("Please enter a valid url (example: https://github.com/svought/GR_Coding_Challenge) : ");
+            System.out.print("Please enter a valid url (example: https://github.com/square/okhttp) : ");
             url = scanner.nextLine();
         }
 
         // Close scanner
         scanner.close();
 
+        // Create an instance of RepoContributions class
         RepoContributions repoContributions = new RepoContributions();
 
-        System.out.println("Valid URL accepted: " + url);
+        // Inform user that url was accepted
+        System.out.println("Valid URL " + url + ", processing report...\n");
+
+        // Call getDataFromAPI() from the instance or RepoContributions class
         repoContributions.getDataFromAPI(url);
+    }
+
+    public static void main(String[] args) throws MalformedURLException, URISyntaxException {
+        driver();
     }
 }
