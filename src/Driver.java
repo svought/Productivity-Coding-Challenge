@@ -8,10 +8,10 @@ public class Driver {
         try {
             // Attempt to create a URI with given url
             new URL(url).toURI();
-            return true;
+            return url.toLowerCase().startsWith("http://github.com/") || url.toLowerCase().startsWith("https://github.com/");
         } catch (MalformedURLException e) {
             // Handle string not parsed to URL correctly
-            System.out.println("Bad URL\n" + e.toString());
+            System.out.println("Invalid URL");
             return false;
         } catch (URISyntaxException e) {
             // Handle illegal characters in URL
@@ -23,12 +23,12 @@ public class Driver {
 
         // Get repo URL from user
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter GitHub repository URL (example: https://github.com/svought/GR_Coding_Challenge) : ");
+        System.out.print("Enter GitHub repository URL (example: https://github.com/svought/GR_Coding_Challenge) : ");
         String url = scanner.nextLine();
 
         // Ensure valid url is given by user
         while (!isValidURL(url)) {
-            System.out.println("Please enter a valid ");
+            System.out.print("Please enter a valid url (example: https://github.com/svought/GR_Coding_Challenge) : ");
             url = scanner.nextLine();
         }
 
@@ -38,6 +38,6 @@ public class Driver {
         RepoContributions repoContributions = new RepoContributions();
 
         System.out.println("Valid URL accepted: " + url);
-
+        repoContributions.getDataFromAPI(url);
     }
 }

@@ -1,4 +1,7 @@
 import java.io.IOException;
+import java.util.List;
+
+import com.google.gson.JsonSyntaxException;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -7,4 +10,61 @@ import com.google.gson.GsonBuilder;
 
 public class RepoContributions {
 
+    public void getDataFromAPI(String url) {
+        String apiUrl;
+
+        if (url.toLowerCase().startsWith("http://")) {
+            apiUrl = String.format("https://api.github.com/repos/%s/stats/contributors", url.substring(18));
+        } else {
+            apiUrl = String.format("https://api.github.com/repos/%s/stats/contributors", url.substring(19));
+        }
+
+        OkHttpClient client = new OkHttpClient();
+
+        Request request = new Request.Builder().url(apiUrl).
+                header("Accept", "application/vnd.github.v3+json").build();
+
+        Contributor[] contributors;
+        try {
+            Response response = client.newCall(request).execute();
+            String responseBody = response.body().string();
+
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
+            try {
+                contributors = gson.fromJson(responseBody, Contributor[].class);
+                System.out.println("Contribution data for " + url);
+                for (Contributor contributor : contributors) {
+                    System.out.println("- " + contributor.author.login + ": " + contributor.total + " contributions, " + contributor.total / contributor.weeks.size() + " Commits per Week");
+                }
+            } catch (JsonSyntaxException e) {
+                System.out.println("Error parsing JSON: " + e.getMessage());
+            } catch (Exception e) {
+                System.out.println("Error processing HTTP response: " + e.getMessage());
+            }
+
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        System.out.println(apiUrl);
+    }
+
+    private class Contributor {
+        private Author author;
+        private int total;
+        private List<Week> weeks;
+    }
+
+    private class Week {
+        private long w;
+    }
+
+    private class Author {
+        private String login;
+    }
+
 }
+
+
