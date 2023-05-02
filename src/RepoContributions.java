@@ -44,10 +44,8 @@ public class RepoContributions {
                     System.out.println("- " + contributor.author.login + ": " + contributor.total + " Total Contributions, " + contributor.total / contributor.weeks.size() + " Commits per Week");
                 }
             } catch (JsonSyntaxException e) {
-                System.out.println("Error parsing, please make sure this is a public repository. " + e.getMessage());
-
                 //TODO - Fix bug where JSON is not parsed and instead produces the JsonSyntaxException (java.lang.IllegalStateException: Expected BEGIN_ARRAY but was BEGIN_OBJECT at line 1 column 2 path $)
-                Driver.driver(); // Current fix is restarting program
+                System.out.println("Error parsing, please make sure this is a public repository. " + e.getMessage());
             } catch (Exception e) {
                 // This should never happen as protocol is verified to be http or https prior to this method call
                 System.out.println("Error processing HTTP response.");
@@ -59,7 +57,7 @@ public class RepoContributions {
         }
 
         // Print link to JSON received from GitHub API
-        System.out.println(apiUrl);
+        //System.out.println(apiUrl);
     }
 
     private class Contributor {
