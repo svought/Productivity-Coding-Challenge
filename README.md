@@ -36,8 +36,10 @@ productivity over the life of the repository. This MVP would contain a break dow
 </ul>
 
 <h1>User Instructions</h1>
+At this point the program must be opened with an IDE, Eclipse or Intellij, then you need to run the main method inside the Driver class. Provide public GitHub repository url. View Report.
 
 <h1>Next Steps</h1>
+First step from this point would be to fix an error occasionally occurs on line 47 of RepoContributions, TODO comment explains issue. Next would be to get exacutable jar file built, my attempt in doing this failed as it could not locate the Driver class. I did research trying to resolve issue, but would need more time and possibly assitance in solving this problem. At this point the MVP is complete. I would think this is a great time to create a graphical interface for the user rather than the text based promts currently. Finally I would start implementing more features such as adding graphs/charts, exported .txt file for easy distribution of report, and any other features the team desires. 
 
 <h1>Technical and Design Decisions</h1>
 Python was originally the only language mentioned in job description but Jay sent me an updated list of acceptable languages, Java was included in this list.
@@ -46,6 +48,7 @@ chose to use OkHttp to make the Get request and to use the open source Gson to c
 
 <h1>My Approach and Pivots</h1>
 <p>I took some time initially to digest the challenge and wrap my head around the problem. Started to think of different possible approaches and how I would like 
-to present the data to the user. After doing some research, I found that repository data can be obtained through GitHubs API and the data is received as JSON.</p>
+to present the data to the user. After doing some research, I found that repository data can be obtained through GitHubs API and the data is received as JSON. I then researched how to fetch and manage the JSON. I found OkHttp library which asyncronously fetches the data, and Gson which efficiently converts JSON to a Java object.</p>
 
 <h1>Final Thoughts</h1>
+<p>I thoroughly enjoyed the challenge and honestly learned alot from the experience. I have completed college but believe my learning is just starting. Problem solving is at my core, getting to solve those problems with a team is my dream, building applications to help people is a cherry on top. Thank you for the challenge and I hope to hear from you soon.</p>
