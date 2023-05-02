@@ -13,17 +13,21 @@ public class RepoContributions {
     public void getDataFromAPI(String url) {
         String apiUrl;
 
+        // Check protocol to adjust substring starting point
         if (url.toLowerCase().startsWith("http://")) {
             apiUrl = String.format("https://api.github.com/repos/%s/stats/contributors", url.substring(18));
         } else {
             apiUrl = String.format("https://api.github.com/repos/%s/stats/contributors", url.substring(19));
         }
 
+        // Create OkHttp client
         OkHttpClient client = new OkHttpClient();
 
+        // Build request with apiUrl
         Request request = new Request.Builder().url(apiUrl).
                 header("Accept", "application/vnd.github.v3+json").build();
 
+        // Store an array of repo contributors
         Contributor[] contributors;
         try {
             Response response = client.newCall(request).execute();
@@ -31,6 +35,7 @@ public class RepoContributions {
 
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
+            // Display desired data to user
             try {
                 contributors = gson.fromJson(responseBody, Contributor[].class);
                 System.out.println("Contribution data for " + url);
